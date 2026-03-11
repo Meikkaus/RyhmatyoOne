@@ -9,7 +9,7 @@
 <body>
 	<div class="entry">
 		<form action="save_entry.php" method="post">
-			<input type=text name="datetime" hidden>
+			<input id="time" type=text name="datetime" hidden>
 			<label for="name">Name: </label>
 			<input id="name" name="name" type=text required>
 			<label for="email">Email: </label>
@@ -30,5 +30,6 @@
 			</tr>
 		</table>
 	</div>
+<script src="js/guestbook.js"></script>
 </body>
 </html>
