@@ -10,9 +10,9 @@
 	<div class="entry">
 		<form action="save_entry.php" method="post">
 			<label for="name">Nimesi: </label>
-			<input id="name" name="name" type=text required></input>
+			<input id="name" name="name" type=text required>
 			<label for="email">Sähköposti: </label>
-			<input id="email" name="email" type=text></input>
+			<input id="email" name="email" type=text>
 			<label for="message"></label>
 			<textarea id="message" name="message" rows=5></textarea>
 			<button type="submit">Lähetä</button>
