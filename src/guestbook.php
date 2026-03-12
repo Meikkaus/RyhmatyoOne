@@ -35,7 +35,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	$email = $_POST["email"];
 	$message = $_POST["message"];
 
-	$entry_cmd = $conn->prepare("INSERT INTO entries VALUES(?, ?, ?, ?)");
+	$entry_cmd = $conn->prepare("INSERT INTO entries (dt, name, email, message) VALUES(?, ?, ?, ?)");
 	$entry_cmd->bind_param("ssss", $dt, $name, $email, $message);
 	if( ! $entry_cmd->execute() ) {
 		die("Saving guestbook entry failed: " . $conn->error);
