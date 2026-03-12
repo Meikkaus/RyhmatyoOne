@@ -4,7 +4,20 @@ body {
 	background-color: lightcyan;
 }
 
-.containeer{
+h1 {
+	color: #04465E;
+	margin-bottom: 12px;
+}
+
+h4 {
+	color: #04465E;
+}
+
+label {
+	color: #04465E;
+}
+
+.container {
 	display: flex;
 	flex-direction: column;
 	margin: 12px;
@@ -13,9 +26,12 @@ body {
 
 .entry {
 	display: flex;
+	flex-direction: column;
+	align-items: center;
 	width: 100%;
-	justify-content: center;
 	background-color: lightblue;
+	border: 2px solid;
+	border-color: #045C7C;
 	margin-bottom: 24px;
 }
 
@@ -23,14 +39,21 @@ input {
 	width: 300px;
 }
 
-.name_div, .email_div, .message_div{
+.name_div, .email_div {
 	display: flex;
-	flex-direction: column;
+	justify-content: space-evenly;
 	margin-top: 16px;
 	margin-bottom: 16px;
 }
 
+.message_div {
+	display: flex;
+	flex-direction: column;
+}
+
 button {
+	color: #04465E;
+	border-color: #045C7C;
 	margin-top: 16px;
 	margin-bottom: 16px;
 }
@@ -44,6 +67,7 @@ table, th, td {
 }
 
 table {
+	min-width: 500px;
 	border: 2px solid;
 	border-color: #045C7C;
 	width: 100%;
@@ -51,6 +75,7 @@ table {
 
 caption {
 	border: 2px solid;
+	border-bottom: unset;
 	border-color: #045C7C;
 	font-size: 18px;
 	background-color: #0780AC;
