@@ -101,7 +101,7 @@ if($data_set === false) {
 				while($row = $data_set->fetch_assoc()) {
 					echo "<tr>";
 					echo "<td>" . htmlspecialchars($row['dt']) . "</td>";
-					echo "<td>" . htmlspecialchars($row['name']) . "</td>";
+					echo "<td id='name'>" . htmlspecialchars($row['name']) . "</td>";
 					echo "<td>" . htmlspecialchars($row['email']) . "</td>";
 					echo "<td id='msg'>" . htmlspecialchars($row['message']) . "</td>";
 					echo "</tr>";
