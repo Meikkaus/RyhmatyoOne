@@ -74,15 +74,15 @@ if($data_set === false) {
 			<input id="time" type="hidden" name="datetime">
 			<div class="name_div">
 				<label for="name">Name: </label>
-				<input id="name" name="name" type=text required>
+				<input name="name" type=text required>
 			</div>
 			<div class="email_div">
 				<label for="email">Email: </label>
-				<input id="email" name="email" type=text>
+				<input name="email" type=text>
 			</div>
 			<div class="message_div">
 				<label for="message">Message</label>
-				<textarea id="message" name="message" rows=5></textarea>
+				<textarea name="message" rows=5></textarea>
 			</div>
 			<button id="button" type="submit">Submit</button>
 		</form>
