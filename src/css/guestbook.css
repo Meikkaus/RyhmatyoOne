@@ -58,6 +58,11 @@ button {
 	margin-bottom: 16px;
 }
 
+.entries {
+	display: flex;
+	width: 100%;
+}
+
 table, th, td {
 	border-collapse: collapse;
 	text-align: left;
