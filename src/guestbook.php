@@ -49,7 +49,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 // Load previous guestbook entries to a variable or exit on failure
-$sql = "SELECT * FROM entries";
+$sql = "SELECT * FROM entries ORDER BY dt DESC";
 $data_set = $conn->query($sql);
 if($data_set === false) {
 	die("Something went wrong: " . $conn->error);
