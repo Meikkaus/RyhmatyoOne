@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("btnGuestbook").addEventListener("click", () => {
         //for opening the guestbook under the index navigation
         document.getElementById("pageContent").setAttribute("src", "guestbook.php");
+
         //code for going completely to the wanted page instead of opening under index navigation
         //can apply if pre used code doesn't work well
         //window.location.href = "guestbook.php";
