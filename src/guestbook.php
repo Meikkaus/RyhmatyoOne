@@ -12,27 +12,27 @@ $driver = new mysqli_driver();
 $driver->report_mode = MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT;
 
 $conf = require "../connection/connect.php";
-$conn = new mysqli($conf["host"], $conf["user"], $conf["pass"], $conf["db"]);
 
-// Exit if connection fails
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+try {
+	// Connect to a mysql/mariadb database
+	$conn = new mysqli($conf["host"], $conf["user"], $conf["pass"], $conf["db"]);
 
-// Set charset for connection
-$conn->set_charset('utf8mb4');
+	// Set charset for connection
+	$conn->set_charset('utf8mb4');
 
-// Construct SQL query to create a table if it does not exist
-$sql = "CREATE TABLE IF NOT EXISTS entries ";
-$sql .= "(dt CHAR(29) NOT NULL, "; // Javascript UTC datetime takes up to 29 chars
-$sql .= "name CHAR(255) NOT NULL, ";
-$sql .= "email CHAR(254), "; // Combined all limitations results to 254 chars
-$sql .= "message VARCHAR(1024))";
+	// Construct SQL query to create a table if it does not exist
+	$sql = "CREATE TABLE IF NOT EXISTS entries ";
+	$sql .= "(dt CHAR(29) NOT NULL, "; // Javascript UTC datetime takes up to 29 chars
+	$sql .= "name CHAR(255) NOT NULL, ";
+	$sql .= "email CHAR(254), "; // Combined all limitations results to 254 chars
+	$sql .= "message VARCHAR(1024))";
 
-// Create table or exit if creation fails
-$result = $conn->query($sql);
-if($result === false) {
-	die("Table creation failed: " .  $conn->error);
+	// Create table or exit if creation fails
+	$result = $conn->query($sql);
+
+} catch (mysql_sql_exection $e) {
+	echo $ERROR_HTML;
+	return;
 }
 
 // Catch if user is submitting a new guestbook entry
