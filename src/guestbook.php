@@ -24,10 +24,10 @@ $sql .= "message VARCHAR(1024))";
 // Create table or exit if creation fails
 $result = $conn->query($sql);
 if($result === false) {
-	die("Something went wrong: " .  $conn->error);
+	die("Table creation failed: " .  $conn->error);
 }
 
-// Catch if file was reloaded when user submitted a new guestbook entry
+// Catch if user is submitting a new guestbook entry
 // and consturct a SQL INSERT statement using user posted values and execute it
 if($_SERVER["REQUEST_METHOD"] == "POST") {
 	$dt = $_POST["datetime"];
@@ -38,21 +38,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	$entry_cmd = $conn->prepare("INSERT INTO entries (dt, name, email, message) VALUES(?, ?, ?, ?)");
 	$entry_cmd->bind_param("ssss", $dt, $name, $email, $message);
 	if( ! $entry_cmd->execute() ) {
-		die("Saving guestbook entry failed: " . $conn->error);
+		die("Inserting guestbook entry failed: " . $conn->error);
 	}
 
 	// Redirect to self to prevent secondary submits on reload
-	header("Location: " . $_SERVER['PHP_SELF']);
+    header("Location: " . $_SERVER['PHP_SELF']);
 
-	// No need to process rest of file after redirection to self
-	exit();
+    // No need to process rest of file after redirection to self
+    exit();
 }
 
 // Load previous guestbook entries to a variable or exit on failure
-$sql = "SELECT * FROM entries";
+$sql = "SELECT * FROM entries ORDER BY dt DESC";
 $data_set = $conn->query($sql);
 if($data_set === false) {
-	die("Something went wrong: " . $conn->error);
+	die("Loading guetbook entries failed: " . $conn->error);
 }
 ?>
 
@@ -68,29 +68,35 @@ if($data_set === false) {
 	<title>Health Fitness Plus's Guestbook</title>
 </head>
 <body>
-	<div class="entry">
-		<form method="post">
-			<!-- Javascript stores user's datetime from browser to a hidden input -->
-			<input id="time" type="hidden" name="datetime">
-			<div class="name_div">
-				<label for="name">Name: </label>
-				<input name="name" type=text required>
-			</div>
-			<div class="email_div">
-				<label for="email">Email: </label>
-				<input name="email" type=text>
-			</div>
-			<div class="message_div">
-				<label for="message">Message</label>
-				<textarea name="message" rows=5></textarea>
-			</div>
-			<button id="button" type="submit">Submit</button>
-		</form>
+	<h1>Our guestbook</h1>
+	<div class="container">
+		<img src="siteimages/silhouette-small.png">
+		<div class="entry">
+			<h4>Add entry to guestbook and leave a message</h4>
+			<form method="post">
+				<!-- Javascript stores user's datetime from browser to a hidden input -->
+				<input id="time" type="hidden" name="datetime">
+				<div class="name_div">
+					<label for="name">Name: </label>
+					<input name="name" type=text required>
+				</div>
+				<div class="email_div">
+					<label for="email">Email: </label>
+					<input name="email" type=text>
+				</div>
+				<div class="message_div">
+					<label for="message">Message</label>
+					<textarea name="message" rows=5></textarea>
+				</div>
+				<button id="button" type="submit">Submit</button>
+			</form>
+		</div>
+		<img src="siteimages/lifting-small.png">
 	</div>
 	<div class="entries">
 		<!-- Static caption and table headers -->
 		<table>
-			<caption>Guestbook entries</caption>
+			<caption>Our Visitors</caption>
 			<tr>
 				<th>Time</th>
 				<th>Name</th>
@@ -101,7 +107,7 @@ if($data_set === false) {
 				while($row = $data_set->fetch_assoc()) {
 					echo "<tr>";
 					echo "<td>" . htmlspecialchars($row['dt']) . "</td>";
-					echo "<td>" . htmlspecialchars($row['name']) . "</td>";
+					echo "<td id='name'>" . htmlspecialchars($row['name']) . "</td>";
 					echo "<td>" . htmlspecialchars($row['email']) . "</td>";
 					echo "<td id='msg'>" . htmlspecialchars($row['message']) . "</td>";
 					echo "</tr>";
